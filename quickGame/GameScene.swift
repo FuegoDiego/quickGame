@@ -15,6 +15,8 @@ class GameScene: SKScene {
     var rightButton: SKSpriteNode!
     var movingLeft = false
     var movingRight = false
+    var ground: SKSpriteNode!
+    
     
     override func didMove(to view: SKView) {
         ball = self.childNode(withName: "ball") as! SKSpriteNode
@@ -32,6 +34,16 @@ class GameScene: SKScene {
             rightButton.position = CGPoint(x: -self.size.width/2 + 220, y: -self.size.height/2 + 100)
             rightButton.zPosition = 100
             addChild(rightButton)
+        
+        ground = SKSpriteNode(color: .brown, size: CGSize(width: self.size.width * 2, height: 40))
+        ground.position = CGPoint(x: 0, y: -self.size.height/2 + 20) // 20 = half of ground height
+        ground.zPosition = 1
+        addChild(ground)
+
+// Add physics so ball can collide
+        ground.physicsBody = SKPhysicsBody(rectangleOf: ground.size)
+        ground.physicsBody?.isDynamic = false 
+        ground.physicsBody?.restitution = 0
     }
     override func update(_ currentTime: TimeInterval) {
         cam.position = ball.position
