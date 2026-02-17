@@ -30,7 +30,43 @@ class GameViewController: UIViewController {
             view.showsFPS = true
             view.showsNodeCount = true
         }
+        createButtons()
     }
+    func createButtons() {
+
+            // LEFT BUTTON
+            let left = UIButton(type: .system)
+            left.frame = CGRect(x: 40, y: view.frame.height - 120, width: 80, height: 80)
+            left.backgroundColor = .blue
+            left.alpha = 0.6
+            left.layer.cornerRadius = 40
+            left.addTarget(self, action: #selector(leftDown), for: .touchDown)
+            left.addTarget(self, action: #selector(stopMove), for: [.touchUpInside,.touchUpOutside])
+            view.addSubview(left)
+
+            // RIGHT BUTTON
+            let right = UIButton(type: .system)
+            right.frame = CGRect(x: 140, y: view.frame.height - 120, width: 80, height: 80)
+            right.backgroundColor = .green
+            right.alpha = 0.6
+            right.layer.cornerRadius = 40
+            right.addTarget(self, action: #selector(rightDown), for: .touchDown)
+            right.addTarget(self, action: #selector(stopMove), for: [.touchUpInside,.touchUpOutside])
+            view.addSubview(right)
+        }
+
+        @objc func leftDown() {
+            play.movingLeft = true
+        }
+
+        @objc func rightDown() {
+            play.movingRight = true
+        }
+
+        @objc func stopMove() {
+            play.movingLeft = false
+            play.movingRight = false
+        }
     @IBAction func buttonAction(_ sender: Any) {
         play.reset()
     }
