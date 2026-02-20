@@ -32,6 +32,10 @@ class GameViewController: UIViewController {
         }
         createButtons()
     }
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        createButtons()
+    }
     func createButtons() {
 
             // LEFT BUTTON
